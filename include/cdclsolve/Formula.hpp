@@ -28,6 +28,7 @@ public:
   std::int32_t resolveConflict(std::int32_t decisionLevel);
 
 private:
+  static constexpr std::string_view COMMENT_LINE_C{"c"};
   static constexpr std::string_view PROBLEM_LINE_P{"p"};
   static constexpr std::string_view PROBLEM_LINE_CNF{"cnf"};
   static constexpr std::string_view SOLUTION_LINE_S{"s"};

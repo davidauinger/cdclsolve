@@ -11,6 +11,11 @@ cdclsolve::Formula cdclsolve::Formula::readInput(std::istream &from) {
   std::string token;
   std::int32_t atom;
   from >> token;
+  while (token == std::string(COMMENT_LINE_C)) {
+    std::string commentLine{};
+    std::getline(from, commentLine);
+    from >> token;
+  }
   if (token != std::string(PROBLEM_LINE_P)) {
     throw std::runtime_error("invalid token in problem line: expected '" +
                              std::string(PROBLEM_LINE_P) + "' but got '" +
@@ -25,6 +30,10 @@ cdclsolve::Formula cdclsolve::Formula::readInput(std::istream &from) {
   from >> numberOfAtoms;
   from >> numberOfClauses;
   from >> token;
+  while (token == std::string(COMMENT_LINE_C)) {
+    std::getline(from, token);
+    from >> token;
+  }
   Formula formula{numberOfAtoms, numberOfClauses};
   while (!from.eof()) {
     std::vector<std::pair<std::shared_ptr<Variable>, bool>> clause;
