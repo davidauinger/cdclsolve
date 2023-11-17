@@ -11,6 +11,9 @@
 #include <iostream>
 #include <string>
 
+static int constexpr returnSatisfiable{10};
+static int constexpr returnUnsatisfiable{20};
+
 int main(int argc, char **argv) {
   boost::program_options::options_description desc("Allowed options");
   desc.add_options()("help,h", "produce help message")(
@@ -40,7 +43,7 @@ int main(int argc, char **argv) {
   cdclsolve::Formula formula{cdclsolve::Formula::readInput(std::cin)};
   const std::string decisionHeuristic{vm["decision"].as<std::string>()};
   cdclsolve::Solver solver{cdclsolve::Solver(formula, decisionHeuristic)};
-  solver.solve();
+  auto s{solver.solve()};
 
   std::ofstream output;
   if (vm.count("output")) {
@@ -76,5 +79,6 @@ int main(int argc, char **argv) {
                      .count()
               << " " << solver.getRelativeDurationTotal() << std::endl;
   }
-  return 0;
+  return s == cdclsolve::Solver::Result::SAT ? returnSatisfiable
+                                             : returnUnsatisfiable;
 }

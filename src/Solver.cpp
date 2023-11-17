@@ -97,12 +97,12 @@ cdclsolve::Solver::Result cdclsolve::Solver::doSolve() {
   while (formula.hasFreeLiterals()) {
     doDecision();
     doBooleanConstraintPropagation();
-    if (formula.hasConflict()) {
+    while (formula.hasConflict()) {
       doConflictResolution();
-      doBooleanConstraintPropagation();
       if (formula.hasConflict()) {
         return Result::UNSAT;
       }
+      doBooleanConstraintPropagation();
     }
   }
   return Result::SAT;

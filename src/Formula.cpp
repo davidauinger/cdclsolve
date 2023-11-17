@@ -211,15 +211,15 @@ std::int32_t cdclsolve::Formula::resolveConflict(std::int32_t decisionLevel) {
           std::min(backtrackLevel, variables[std::abs(l)]->getDecisionLevel());
     }
   }
-  while (decisionLevel >= std::max(backtrackLevel, 0)) {
-    for (auto &v : variables) {
-      if (v->getDecisionLevel() == decisionLevel) {
-        unassign(v);
-      }
-    }
-    --decisionLevel;
-  }
   if (backtrackLevel >= 0) {
+    while (decisionLevel >= backtrackLevel) {
+      for (auto &v : variables) {
+        if (v->getDecisionLevel() == decisionLevel) {
+          unassign(v);
+        }
+      }
+      --decisionLevel;
+    }
     conflict.reset();
   }
   updateVsidsScores(conflictClause->getLiterals());
