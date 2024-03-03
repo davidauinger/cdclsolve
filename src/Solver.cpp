@@ -83,8 +83,8 @@ double cdclsolve::Solver::getRelativeDurationTotal() const {
 const std::map<std::string, cdclsolve::Solver::decisionFunction>
     cdclsolve::Solver::decisionHeuristicMap{
         {"basic", [](const Formula &formula) { return formula.decideBasic(); }},
-        {"jeroslovwang",
-         [](const Formula &formula) { return formula.decideJeroslovWang(); }},
+        {"jeroslowwang",
+         [](const Formula &formula) { return formula.decideJeroslowWang(); }},
         {"dlis", [](const Formula &formula) { return formula.decideDlis(); }},
         {"vsids",
          [](const Formula &formula) { return formula.decideVsids(); }}};

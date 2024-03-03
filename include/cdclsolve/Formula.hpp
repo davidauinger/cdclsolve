@@ -21,7 +21,7 @@ public:
   void propagateUnitLiterals(std::int32_t decisionLevel);
   void assign(std::int32_t literal, std::int32_t decisionLevel);
   std::int32_t decideBasic() const;
-  std::int32_t decideJeroslovWang() const;
+  std::int32_t decideJeroslowWang() const;
   std::int32_t decideDlis() const;
   std::int32_t decideVsids() const;
   bool hasConflict() const;
@@ -52,7 +52,7 @@ private:
   std::int32_t getAnswer() const;
   bool resolveConflict(std::int32_t decisionLevel,
                        std::shared_ptr<Clause> conflictClause);
-  float getJeroslovWangHeuristic(std::int32_t literal) const;
+  float getJeroslowWangHeuristic(std::int32_t literal) const;
   std::int32_t getSatisfyingClauses(std::int32_t literal) const;
   void precomputeVsidsScores() const;
   void updateVsidsScores(const std::set<std::int32_t> &conflictClause) const;

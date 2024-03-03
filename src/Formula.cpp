@@ -130,16 +130,16 @@ std::int32_t cdclsolve::Formula::decideBasic() const {
   return 0;
 }
 
-std::int32_t cdclsolve::Formula::decideJeroslovWang() const {
+std::int32_t cdclsolve::Formula::decideJeroslowWang() const {
   std::int32_t literal{0};
   float maxHeuristic{-1.0f};
   for (std::size_t vi{1}; vi < variables.size(); ++vi) {
     if (!variables.at(vi)->isAssigned()) {
-      if (auto h{getJeroslovWangHeuristic(vi)}; h > maxHeuristic) {
+      if (auto h{getJeroslowWangHeuristic(vi)}; h > maxHeuristic) {
         literal = vi;
         maxHeuristic = h;
       }
-      if (auto h{getJeroslovWangHeuristic(-vi)}; h > maxHeuristic) {
+      if (auto h{getJeroslowWangHeuristic(-vi)}; h > maxHeuristic) {
         literal = -vi;
         maxHeuristic = h;
       }
@@ -310,7 +310,7 @@ bool cdclsolve::Formula::resolveConflict(
   return false;
 }
 
-float cdclsolve::Formula::getJeroslovWangHeuristic(std::int32_t literal) const {
+float cdclsolve::Formula::getJeroslowWangHeuristic(std::int32_t literal) const {
   float h{0.0f};
   for (const auto &clause : clauses) {
     if (clause->hasLiteral(literal)) {
